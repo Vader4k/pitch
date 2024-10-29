@@ -1,6 +1,7 @@
 import SearchForm from "@/components/SearchForm";
 import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
-import { client } from "@/sanity/lib/client";
+// import { client } from "@/sanity/lib/client";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 
 const Home = async ({
@@ -10,7 +11,8 @@ const Home = async ({
 }) => {
   const query = (await searchParams).query;
 
-  const posts = await client.fetch(STARTUPS_QUERY);
+  // const posts = await client.fetch(STARTUPS_QUERY); //this is used when you only revalidate every 60 seconds
+  const {data: posts} = await sanityFetch({ query: STARTUPS_QUERY }); // this is used when you want ur data to be updated in real time
 
   return (
     <>
@@ -37,6 +39,7 @@ const Home = async ({
           )}
         </ul>
       </section>
+      <SanityLive />
     </>
   );
 };

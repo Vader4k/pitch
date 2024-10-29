@@ -6,8 +6,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { Author, Startup } from "@/sanity/types";
 
-
-export type StartupTypeCard = Omit<Startup, "author"> & {author?: Author}
+export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
 
 const StartupCard = ({ post }: { post: StartupTypeCard }) => {
   const {
@@ -41,8 +40,8 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         </div>
         <Link href={`/user/${author?._id}`}>
           <Image
-            src={image ?? ''}
-            alt={author?.name ?? ''}
+            src={image ?? ""}
+            alt={author?.name ?? ""}
             width={50}
             height={50}
             className="rounded-full size-[50px]"
@@ -50,15 +49,17 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         </Link>
       </div>
       <Link href={`/startup/${_id}`}>
-        {description &&<p className="startup-card_desc">
-          {description?.length > 100
-            ? description?.slice(0, 20) + "..."
-            : description}
-        </p>}
+        {description && (
+          <p className="startup-card_desc">
+            {description?.length > 100
+              ? description?.slice(0, 20) + "..."
+              : description}
+          </p>
+        )}
         <Image
           width={200}
           height={200}
-          src={image ?? ''}
+          src={image ?? ""}
           alt="placeholder-image"
           className="startup-card_img"
         />
