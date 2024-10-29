@@ -10,7 +10,7 @@ export function parseServerActionResponse<T>(response: T) {
 }
 
 
-export function formatDate(date: Date){
+export function formatDate(date: string){
     return new Date(date).toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'long',

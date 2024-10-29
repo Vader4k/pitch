@@ -1,5 +1,5 @@
 import SearchForm from "@/components/SearchForm";
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 import { client } from "@/sanity/lib/client";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 
@@ -29,10 +29,12 @@ const Home = async ({
         </p>
         <ul className="mt-7 card_grid">
           {posts?.length > 0 ? (
-            posts.map((post:StartupCardType) => (
-              <StartupCard key={post?._id} post={post}/>
+            posts.map((post: StartupTypeCard) => (
+              <StartupCard key={post?._id} post={post} />
             ))
-          ) : (<p>No Startups found</p>)}
+          ) : (
+            <p>No Startups found</p>
+          )}
         </ul>
       </section>
     </>
