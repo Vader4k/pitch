@@ -41,7 +41,7 @@ const StartupCard = ({ post }: StartupTypeCard) => {
             alt={name}
             width={50}
             height={50}
-            className="rounded-full"
+            className="rounded-full size-[50px]"
           />
         </Link>
       </div>
@@ -52,7 +52,7 @@ const StartupCard = ({ post }: StartupTypeCard) => {
         <Image width={200} height={200} src={image} alt="placeholder-image" className="startup-card_img"/>
       </Link>
       <div className="flex-between gap-3 mt-5">
-        <Link href={`/?query=${category.toLowerCase()}`}>
+        <Link href={`/?query=${category?.toLowerCase()}`}>
             <p className="text-16-medium">{category}</p>
         </Link>
         <Button className="startup-card_btn" asChild>
