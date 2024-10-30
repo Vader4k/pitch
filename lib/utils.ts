@@ -17,3 +17,11 @@ export function formatDate(date: string){
         year: 'numeric'
     })
 }
+
+export function formatViews(views: number){
+    if(views <= 1) {
+        return `view: ${views}`
+    } else {
+        return `views: ${views}`
+    }
+}

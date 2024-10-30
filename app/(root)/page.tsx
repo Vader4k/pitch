@@ -3,6 +3,8 @@ import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 // import { client } from "@/sanity/lib/client";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
+import { notFound } from "next/navigation";
+
 
 const Home = async ({
   searchParams,
@@ -15,6 +17,9 @@ const Home = async ({
 
   // const posts = await client.fetch(STARTUPS_QUERY); //this is used when you only revalidate every 60 seconds
   const {data: posts} = await sanityFetch({ query: STARTUPS_QUERY, params }); // this is used when you want ur data to be updated in real time
+
+  if (!posts) return notFound();
+
 
   return (
     <>
