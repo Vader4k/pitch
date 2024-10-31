@@ -5,6 +5,8 @@ import { client } from "./sanity/lib/client";
 import { AUTHOR_BY_GITHUB_ID_QUERY } from "./sanity/lib/queries";
 import { writeClient } from "./sanity/lib/write-client";
 
+// Define session types
+
 // Configure and export NextAuth functionality
 export const { handlers, auth, signIn, signOut } = NextAuth({
   // Set up authentication providers - currently only using GitHub
@@ -15,8 +17,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     // Triggered when a user signs in
     async signIn({
       user: { name, image, email },    // Destructure user data from GitHub
-      profile: { id, login, bio },     // Destructure profile data from GitHub
+      profile,                         // Profile data from GitHub
     }) {
+      // Destructure profile data if it exists
+      const { id, login, bio } = profile || {};
       // Check if user already exists in Sanity database
       const existingUser = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
         id,
@@ -53,7 +57,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
     // Manages session data
     async session({ session, token }) {
-      // Add Sanity document ID to the session
+      // Add Sanity document ID to the session so u can grab the session token anywhere u need
       Object.assign(session, { id: token.id });
       return session;
     }
