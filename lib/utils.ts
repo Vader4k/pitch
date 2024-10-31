@@ -19,9 +19,10 @@ export function formatDate(date: string){
 }
 
 export function formatViews(views: number){
-    if(views <= 1) {
-        return `view: ${views}`
+    if(views === null ||views <= 1) {
+        return `view: 1`
     } else {
         return `views: ${views}`
     }
 }
+

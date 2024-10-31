@@ -36,10 +36,12 @@
     "sanity": "^3.62.3",
     "sanity-plugin-markdown": "^5.0.0",
     "server-only": "^0.0.1",
+    "slugify": "^1.6.6",
     "styled-components": "^6.1.13",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
-    "tailwindcss-typography": "^3.1.0"
+    "tailwindcss-typography": "^3.1.0",
+    "zod": "^3.24.0-canary.20241016T212913"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
