@@ -5,7 +5,6 @@ import StartupCard, { StartupTypeCard } from "./StartupCard";
 
 const UserStartups = async ({ id }: { id: string }) => {
   const startups = await client.fetch(AUTHOR_STARTUPS_QUERY, { id });
-  console.log(startups);
 
   return (
     <>
