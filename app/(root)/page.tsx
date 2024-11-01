@@ -17,7 +17,7 @@ const Home = async ({
   const params = {search: query || null}
 
   const session = await auth()
-  console.log(session?.id)
+  console.log(session)
   // const posts = await client.fetch(STARTUPS_QUERY); //this is used when you only revalidate every 60 seconds
   const {data: posts} = await sanityFetch({ query: STARTUPS_QUERY, params }); // this is used when you want ur data to be updated in real time
 

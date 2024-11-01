@@ -22,7 +22,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       // Destructure profile data if it exists
       const { id, login, bio } = profile || {};
       // Check if user already exists in Sanity database
-      const existingUser = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
+      const existingUser = await client.withConfig({ useCdn: false }).fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
         id,
       });
       
