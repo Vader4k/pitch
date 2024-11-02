@@ -15,7 +15,7 @@
   "overrides": {
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
-    "next": "15.0.0-canary.183"
+    "next": "15.0.3-canary.3"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",
@@ -31,7 +31,7 @@
     "easymde": "^2.18.0",
     "lucide-react": "^0.453.0",
     "markdown-it": "^14.1.0",
-    "next": "15.0.0-canary.183",
+    "next": "15.0.3-canary.3",
     "next-auth": "^5.0.0-beta.25",
     "next-sanity": "^9.8.8",
     "react": "19.0.0-rc-69d4b800-20241021",

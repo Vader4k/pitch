@@ -1,6 +1,9 @@
 import { Suspense } from "react";
 import { client } from "@/sanity/lib/client";
-import { STARTUP_BY_ID_QUERY } from "@/sanity/lib/queries";
+import {
+  STARTUP_BY_ID_QUERY,
+  PLAYLIST_BY_SLUG
+} from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import markdownit from "markdown-it";
 import { formatDate } from "@/lib/utils";
@@ -8,6 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import View from "@/components/View";
+import { groq } from "next-sanity";
 
 const md = markdownit();
 export const experimental_ppr = true;
@@ -16,6 +20,9 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
   const details = await client.fetch(STARTUP_BY_ID_QUERY, { id });
   if (!details) return notFound();
+
+  const posts = await client.fetch(PLAYLIST_BY_SLUG, {slug : 'editors-pick'})
+  console.log('this is playlist', posts)
 
   //store the mackdown content from the posts in a parsedcontent variable
   const parsedContent = md.render(details?.pitch || "");
@@ -59,16 +66,19 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
           <h3 className="text-30-bold">Pitch Details</h3>
           {parsedContent ? (
-            <article className="prose max-w-4xl font-sans break-all" dangerouslySetInnerHTML={{ __html: parsedContent }} />
+            <article
+              className="prose max-w-4xl font-sans break-all"
+              dangerouslySetInnerHTML={{ __html: parsedContent }}
+            />
           ) : (
             <p className="no-result">No details provided</p>
           )}
         </div>
-        <hr className="divider"/>
-      {/* todo selection startup */}
-      <Suspense fallback={<Skeleton className="view_skeleton"/>}>
-          <View id={id}/>
-      </Suspense>
+        <hr className="divider" />
+        {/* todo selection startup */}
+        <Suspense fallback={<Skeleton className="view_skeleton" />}>
+          <View id={id} />
+        </Suspense>
       </section>
     </>
   );
