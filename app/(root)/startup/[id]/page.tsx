@@ -16,14 +16,15 @@ export const experimental_ppr = true;
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
-  const details = await client.fetch(STARTUP_BY_ID_QUERY, { id });
+
+  //now we need to call both request at the same time to prevent load time since the second request doesnt depend on the first
+
+  const [details, editorsPick] = await Promise.all([
+    client.fetch(STARTUP_BY_ID_QUERY, { id }),
+    client.fetch(PLAYLIST_BY_SLUG, { slug: "editors-pick" }),
+  ]);
+
   if (!details) return notFound();
-
-  const editorsPick = await client.fetch(PLAYLIST_BY_SLUG, {
-    slug: "editors-pick",
-  });
-
-
 
   //store the mackdown content from the posts in a parsedcontent variable
   const parsedContent = md.render(details?.pitch || "");
